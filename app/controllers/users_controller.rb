@@ -4,8 +4,8 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
-
-    render json: @users
+   options = {include: [:projects]}
+    render json: UserSerializer.new(@users, options )
   end
 
   # GET /users/1
