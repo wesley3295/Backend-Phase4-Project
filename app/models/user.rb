@@ -4,6 +4,6 @@ class User < ApplicationRecord
     validates :last_name, presence: true
     validates :github, presence: true
     validates :email, presence: true
+    accepts_nested_attributes_for :projects
     
-
 end

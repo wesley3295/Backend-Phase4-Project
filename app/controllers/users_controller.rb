@@ -27,7 +27,8 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      render json: @user
+      options = {include: [:projects]}
+      render json: UserSerializer.new(@users, options )
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -46,6 +47,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name,:email, :github, :linkdn, :facebook, :twitter, :reddit, :youtube)
+      params.require(:user).permit(:first_name, :last_name,:email, :github, :linkdn, :facebook, :twitter, :reddit, :youtube, :projects_attributes=>[:title,:video_link,:project_link,:cohort,:blog_link,:id,:user_id])
     end
 end
